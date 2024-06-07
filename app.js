@@ -1,17 +1,21 @@
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
+const db = require('./db');
 
-let db = new sqlite3.Database('./easyfit.db', (err) => {
-  if (err) {
-    console.error(err.message);
-  }
-  console.log('Connected to the database.');
-});
-
-const hostname = '26.79.198.107';
 const port = 3002;
 const app = express();
 const jsonParser = express.json();
+
+// const string1 = "Наклоны головы — техника выполнения упражнения:\n1. Встаньте прямо.\n2. Медленно наклоните голову вперед, пытаясь прижать подбородок к груди. Затем отведите голову назад, стараясь не перегружать шею\n3. Медленно наклоните голову к левому плечу, стараясь прижать ухо к плечу. Вернитесь в исходное положение и повторите наклон к правому плечу.\n4. Повторите несколько раз для каждой стороны."
+// const sql = `INSERT INTO exercises (name_exercises, description_exercises, muscles_exercises) VALUES ('пук', 'пукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпук', 'Спина')`;
+
+// db.run(sql, function(err) {
+//   if (err) {
+//     console.error(err.message);
+//   }
+//   // Вывод сообщения об успешном выполнении операции
+//   console.log(`Row inserted with key: ${this.lastID}`);
+// });
 
 const getExercises = async (sqlReq) => {
   const result = [];
@@ -28,9 +32,9 @@ const getExercises = async (sqlReq) => {
       // Вывод всех записей
       rows.forEach((row) => {
         result.push({
-          "name": row.name_exersises,
-          "description": row.discription_exersises,
-          "muscles": row.muscles_exersises
+          "name": row.name_exercises,
+          "description": row.description_exercises,
+          "muscles": row.muscles_exercises
         });
       });
       resolve();
@@ -40,7 +44,7 @@ const getExercises = async (sqlReq) => {
 };
 
 app.get("/exercises", (req, res) => {
-  const result = getExercises("SELECT * FROM exersises")
+  const result = getExercises("SELECT * FROM exercises")
   result.then(arr => {
     res.setHeader("Access-Control-Allow-Origin", "*")
     res.json(arr)
@@ -49,7 +53,7 @@ app.get("/exercises", (req, res) => {
 });
 
 app.get("/exercises/chest", (req, res) => {
-  const result = getExercises("SELECT * FROM exersises WHERE muscles_exersises = 'Грудь'")
+  const result = getExercises("SELECT * FROM exerсises WHERE muscles_exersises = 'Грудь'")
   result.then(arr => {
     res.setHeader("Access-Control-Allow-Origin", "*")
     res.json(arr)
@@ -57,7 +61,7 @@ app.get("/exercises/chest", (req, res) => {
 });
 
 app.get("/exercises/legs", (req, res) => {
-  const result = getExercises("SELECT * FROM exersises WHERE muscles_exersises = 'Ноги'")
+  const result = getExercises("SELECT * FROM exerсises WHERE muscles_exersises = 'Ноги'")
   result.then(arr => {
     console.log(arr);
     res.setHeader("Access-Control-Allow-Origin", "*")
@@ -66,7 +70,7 @@ app.get("/exercises/legs", (req, res) => {
 });
 
 app.get("/exercises/abs", (req, res) => {
-  const result = getExercises("SELECT * FROM exersises WHERE muscles_exersises = 'Пресс'")
+  const result = getExercises("SELECT * FROM exerсises WHERE muscles_exersises = 'Пресс'")
   result.then(arr => {
     res.setHeader("Access-Control-Allow-Origin", "*")
     res.json(arr)
@@ -74,7 +78,7 @@ app.get("/exercises/abs", (req, res) => {
 });
 
 app.get("/exercises/arms", (req, res) => {
-  const result = getExercises("SELECT * FROM exersises WHERE muscles_exersises = 'Руки'")
+  const result = getExercises("SELECT * FROM exerсises WHERE muscles_exersises = 'Руки'")
   result.then(arr => {
     res.setHeader("Access-Control-Allow-Origin", "*")
     res.json(arr)
@@ -82,7 +86,7 @@ app.get("/exercises/arms", (req, res) => {
 });
 
 app.get("/exercises/back", (req, res) => {
-  const result = getExercises("SELECT * FROM exersises WHERE muscles_exersises = 'Спина'")
+  const result = getExercises("SELECT * FROM exerсises WHERE muscles_exersises = 'Спина'")
   result.then(arr => {
     res.setHeader("Access-Control-Allow-Origin", "*")
     res.json(arr)
