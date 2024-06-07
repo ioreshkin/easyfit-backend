@@ -7,7 +7,17 @@ const app = express();
 const jsonParser = express.json();
 
 // const string1 = "Наклоны головы — техника выполнения упражнения:\n1. Встаньте прямо.\n2. Медленно наклоните голову вперед, пытаясь прижать подбородок к груди. Затем отведите голову назад, стараясь не перегружать шею\n3. Медленно наклоните голову к левому плечу, стараясь прижать ухо к плечу. Вернитесь в исходное положение и повторите наклон к правому плечу.\n4. Повторите несколько раз для каждой стороны."
-// const sql = `INSERT INTO exercises (name_exercises, description_exercises, muscles_exercises) VALUES ('пук', 'пукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпук', 'Спина')`;
+// const sql = `INSERT INTO programs (name, description, categories) VALUES ('пук', 'пукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпукпук', 'Спина')`;
+
+// db.run(sql, function(err) {
+//   if (err) {
+//     console.error(err.message);
+//   }
+//   // Вывод сообщения об успешном выполнении операции
+//   console.log(`Row inserted with key: ${this.lastID}`);
+// });
+
+// const sql = `DROP TABLE programs`;
 
 // db.run(sql, function(err) {
 //   if (err) {
@@ -32,9 +42,9 @@ const getExercises = async (sqlReq) => {
       // Вывод всех записей
       rows.forEach((row) => {
         result.push({
-          "name": row.name_exercises,
-          "description": row.description_exercises,
-          "muscles": row.muscles_exercises
+          "name": row.name,
+          "description": row.description,
+          "muscles": row.muscles
         });
       });
       resolve();
@@ -105,7 +115,7 @@ app.get("/programs", (req, res) => {
       result.push(
         {
           "name": row.name,
-          "description": row.	discription,
+          "description": row.description,
           "categories": row.categories
         }
       )

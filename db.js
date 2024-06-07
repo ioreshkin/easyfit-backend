@@ -8,9 +8,9 @@ const db = new sqlite3.Database('./database.sqlite', (err) => {
     
     db.run(`CREATE TABLE IF NOT EXISTS exercises (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      name_exercises TEXT,
-      description_exercises TEXT,
-      muscles_exercises TEXT
+      name TEXT,
+      description TEXT,
+      muscles TEXT
     )`, (err) => {
       if (err) {
         console.error('Error creating table:', err.message);
@@ -18,6 +18,19 @@ const db = new sqlite3.Database('./database.sqlite', (err) => {
         console.log('Table created or already exists.');
       }
     });
+
+    db.run(`CREATE TABLE IF NOT EXISTS programs (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT,
+        description TEXT,
+        categories TEXT
+      )`, (err) => {
+        if (err) {
+          console.error('Error creating table:', err.message);
+        } else {
+          console.log('Table created or already exists.');
+        }
+      });
   }
 });
 
