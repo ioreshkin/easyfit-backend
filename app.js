@@ -63,7 +63,7 @@ app.get("/exercises", (req, res) => {
 });
 
 app.get("/exercises/chest", (req, res) => {
-  const result = getExercises("SELECT * FROM exerсises WHERE muscles_exersises = 'Грудь'")
+  const result = getExercises("SELECT * FROM exercises WHERE muscles_exersises = 'Грудь'")
   result.then(arr => {
     res.setHeader("Access-Control-Allow-Origin", "*")
     res.json(arr)
@@ -71,7 +71,7 @@ app.get("/exercises/chest", (req, res) => {
 });
 
 app.get("/exercises/legs", (req, res) => {
-  const result = getExercises("SELECT * FROM exerсises WHERE muscles_exersises = 'Ноги'")
+  const result = getExercises("SELECT * FROM exercises WHERE muscles_exersises = 'Ноги'")
   result.then(arr => {
     console.log(arr);
     res.setHeader("Access-Control-Allow-Origin", "*")
@@ -80,7 +80,7 @@ app.get("/exercises/legs", (req, res) => {
 });
 
 app.get("/exercises/abs", (req, res) => {
-  const result = getExercises("SELECT * FROM exerсises WHERE muscles_exersises = 'Пресс'")
+  const result = getExercises("SELECT * FROM exercises WHERE muscles_exersises = 'Пресс'")
   result.then(arr => {
     res.setHeader("Access-Control-Allow-Origin", "*")
     res.json(arr)
@@ -88,7 +88,7 @@ app.get("/exercises/abs", (req, res) => {
 });
 
 app.get("/exercises/arms", (req, res) => {
-  const result = getExercises("SELECT * FROM exerсises WHERE muscles_exersises = 'Руки'")
+  const result = getExercises("SELECT * FROM exercises WHERE muscles_exersises = 'Руки'")
   result.then(arr => {
     res.setHeader("Access-Control-Allow-Origin", "*")
     res.json(arr)
@@ -96,7 +96,7 @@ app.get("/exercises/arms", (req, res) => {
 });
 
 app.get("/exercises/back", (req, res) => {
-  const result = getExercises("SELECT * FROM exerсises WHERE muscles_exersises = 'Спина'")
+  const result = getExercises("SELECT * FROM exercises WHERE muscles_exersises = 'Спина'")
   result.then(arr => {
     res.setHeader("Access-Control-Allow-Origin", "*")
     res.json(arr)
