@@ -108,7 +108,6 @@ app.get("/exercises/chest", (req, res) => {
 app.get("/exercises/legs", (req, res) => {
   const result = getExercises("SELECT * FROM exercises WHERE muscles = 'Ноги'")
   result.then(arr => {
-    console.log(arr);
     res.setHeader("Access-Control-Allow-Origin", "*")
     res.json(arr)
   })
