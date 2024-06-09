@@ -10,10 +10,12 @@ const db = new sqlite3.Database('./database.sqlite', (err) => {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name_ru text NOT NULL,
 	    description_ru text NOT NULL,
-        short_description_ru TEXT NOT NULL,
+        short_description_off_page_ru TEXT NOT NULL,
+        short_description_on_page_ru TEXT NOT NULL,
 	    name_en	TEXT NOT NULL,
 	    description_en TEXT NOT NULL,
-        short_description_en TEXT NOT NULL,
+        short_description_off_page_en TEXT NOT NULL,
+        short_description_on_page_en TEXT NOT NULL,
 	    muscles TEXT NOT NULL,
         preview text NOT NULL,
         gif text NOT NULL
@@ -38,6 +40,7 @@ const db = new sqlite3.Database('./database.sqlite', (err) => {
         time_en text NOT NULL,
 	    categories text NOT NULL,
 	    exercises text NOT NULL,
+        exercises_repeats text NOT NULL,
         preview text NOT NULL
 
       )`, (err) => {

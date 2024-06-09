@@ -7,10 +7,10 @@ const app = express();
 const jsonParser = express.json();
 
 // const string1 = "Наклоны головы — техника выполнения упражнения:\n1. Встаньте прямо.\n2. Медленно наклоните голову вперед, пытаясь прижать подбородок к груди. Затем отведите голову назад, стараясь не перегружать шею\n3. Медленно наклоните голову к левому плечу, стараясь прижать ухо к плечу. Вернитесь в исходное положение и повторите наклон к правому плечу.\n4. Повторите несколько раз для каждой стороны."
-// const sql = `INSERT INTO exercises (name_en, name_ru, description_ru, short_description_ru, short_description_en, description_en, muscles, preview) 
-// VALUES ('Sit-ups', 'Приседания', 'похуй', 'Ну там присесть, а потом ну это самое.. О! Встать', 'Fxck fxck fxck fxck fxck fxck fxck fxck fxck', 'похуй', 'back', '/images/exercises/exercises4.png')`;
-// const sql = `INSERT INTO programs (name_ru, name_en, description_ru, short_description_ru, short_description_en, description_en, categories, exercises, preview, time_ru, time_en)
-//  VALUES ('Приседания)', 'Sit-ups', 'похуй', 'Ну там присесть, а потом ну это самое.. О! Встать', 'Fxck fxck fxck fxck fxck fxck fxck fxck fxck', 'похуй', 'Дом', 'Приседания', '/images/programs/Picture.png', '15 мин', '15 mins')`;
+// const sql = `INSERT INTO exercises (name_en, name_ru, description_ru, short_description_ru, short_description_en, description_en, muscles, preview, gif) 
+// VALUES ('Sit-ups', 'Приседания', 'похуй', 'Ну там присесть, а потом ну это самое.. О! Встать', 'Fxck fxck fxck fxck fxck fxck fxck fxck fxck', 'похуй', 'back', '/images/exercises/exercises4.png', '/images/programs/gif.gif')`;
+// const sql = `INSERT INTO programs (name_ru, name_en, description_ru, short_description_ru, short_description_en, description_en, categories, exercises, exercises_repeats, preview, time_ru, time_en)
+//  VALUES ('Приседания)', 'Sit-ups', 'похуй', 'Ну там присесть, а потом ну это самое.. О! Встать', 'Fxck fxck fxck fxck fxck fxck fxck fxck fxck', 'похуй', 'home', '1', '20', '/images/programs/Picture.png', '15 мин', '15 mins')`;
 
 // db.run(sql, function(err) {
 //   if (err) {
@@ -20,7 +20,7 @@ const jsonParser = express.json();
 //   console.log(`Row inserted with key: ${this.lastID}`);
 // });
 
-// const sql = `DROP TABLE programs`;
+// const sql = `DROP TABLE exercises`;
 
 // db.run(sql, function(err) {
 //   if (err) {
@@ -52,6 +52,7 @@ const getExercises = async (sqlReq) => {
           "description_en": row.description_en,
           "short_description_en": row.short_description_en,
           "muscles": row.muscles_ru,
+          "gif": row.gif,
           "preview": row.preview
         });
       });
@@ -85,8 +86,8 @@ const getPrograms = async (sqlReq) => {
           "time_en": row.time_en,
           "categories": row.categories,
           "exercises": row.exercises,
-          "preview": row.preview,
-          "gif": row.gif
+          "exercises_repeats": row.exercises_repeats,
+          "preview": row.preview
         });
       });
       resolve();
@@ -154,7 +155,7 @@ app.get("/programs", (req, res) => {
 })
 
 app.get("/programs/home", (req, res) => {
-  const result = getPrograms("SELECT * FROM programs WHERE categories = 'Дом'")
+  const result = getPrograms("SELECT * FROM programs WHERE categories = 'home'")
   result.then(arr => {
     res.setHeader("Access-Control-Allow-Origin", "*")
     res.json(arr)
@@ -162,7 +163,7 @@ app.get("/programs/home", (req, res) => {
 })
 
 app.get("/programs/gym", (req, res) => {
-  const result = getPrograms("SELECT * FROM programs WHERE categories = 'Зал'")
+  const result = getPrograms("SELECT * FROM programs WHERE categories = 'gym'")
   result.then(arr => {
     res.setHeader("Access-Control-Allow-Origin", "*")
     res.json(arr)
