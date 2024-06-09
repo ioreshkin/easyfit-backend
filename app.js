@@ -7,8 +7,10 @@ const app = express();
 const jsonParser = express.json();
 
 // const string1 = "Наклоны головы — техника выполнения упражнения:\n1. Встаньте прямо.\n2. Медленно наклоните голову вперед, пытаясь прижать подбородок к груди. Затем отведите голову назад, стараясь не перегружать шею\n3. Медленно наклоните голову к левому плечу, стараясь прижать ухо к плечу. Вернитесь в исходное положение и повторите наклон к правому плечу.\n4. Повторите несколько раз для каждой стороны."
-const sql = `INSERT INTO exercises (name_en, name_ru, description_ru, short_description_ru, short_description_en, description_en, muscles) VALUES ('Sit-ups', 'Приседания', 'похуй', 'Ну там присесть, а потом ну это самое.. О! Встать', 'Fxck fxck fxck fxck fxck fxck fxck fxck fxck', 'похуй', 'Спина')`;
-// const sql = `INSERT INTO programs (name_ru, name_en, description_ru, short_description_ru, short_description_en, description_en, categories, exercises) VALUES ('Приседания)', 'Sit-ups', 'похуй', 'Ну там присесть, а потом ну это самое.. О! Встать', 'Fxck fxck fxck fxck fxck fxck fxck fxck fxck', 'похуй', 'Дом', 'Приседания')`;
+// const sql = `INSERT INTO exercises (name_en, name_ru, description_ru, short_description_ru, short_description_en, description_en, muscles, preview) 
+// VALUES ('Sit-ups', 'Приседания', 'похуй', 'Ну там присесть, а потом ну это самое.. О! Встать', 'Fxck fxck fxck fxck fxck fxck fxck fxck fxck', 'похуй', 'back', '/images/exercises/exercises4.png')`;
+// const sql = `INSERT INTO programs (name_ru, name_en, description_ru, short_description_ru, short_description_en, description_en, categories, exercises, preview, time_ru, time_en)
+//  VALUES ('Приседания)', 'Sit-ups', 'похуй', 'Ну там присесть, а потом ну это самое.. О! Встать', 'Fxck fxck fxck fxck fxck fxck fxck fxck fxck', 'похуй', 'Дом', 'Приседания', '/images/programs/Picture.png', '15 мин', '15 mins')`;
 
 // db.run(sql, function(err) {
 //   if (err) {
@@ -18,7 +20,7 @@ const sql = `INSERT INTO exercises (name_en, name_ru, description_ru, short_desc
 //   console.log(`Row inserted with key: ${this.lastID}`);
 // });
 
-// const sql = `DROP TABLE exercises`;
+// const sql = `DROP TABLE programs`;
 
 // db.run(sql, function(err) {
 //   if (err) {
@@ -49,7 +51,8 @@ const getExercises = async (sqlReq) => {
           "name_en": row.name_en,
           "description_en": row.description_en,
           "short_description_en": row.short_description_en,
-          "muscles": row.muscles_ru
+          "muscles": row.muscles_ru,
+          "preview": row.preview
         });
       });
       resolve();
@@ -75,11 +78,15 @@ const getPrograms = async (sqlReq) => {
           "name_ru": row.name_ru,
           "description_ru": row.description_ru,
           "short_description_ru": row.short_description_ru,
+          "time_ru": row.time_ru,
           "name_en": row.name_en,
           "description_en": row.description_en,
           "short_description_en": row.short_description_en,
+          "time_en": row.time_en,
           "categories": row.categories,
-          "exercises": row.exercises
+          "exercises": row.exercises,
+          "preview": row.preview,
+          "gif": row.gif
         });
       });
       resolve();
@@ -98,7 +105,7 @@ app.get("/exercises", (req, res) => {
 });
 
 app.get("/exercises/chest", (req, res) => {
-  const result = getExercises("SELECT * FROM exercises WHERE muscles = 'Грудь'")
+  const result = getExercises("SELECT * FROM exercises WHERE muscles = 'chest'")
   result.then(arr => {
     res.setHeader("Access-Control-Allow-Origin", "*")
     res.json(arr)
@@ -106,7 +113,7 @@ app.get("/exercises/chest", (req, res) => {
 });
 
 app.get("/exercises/legs", (req, res) => {
-  const result = getExercises("SELECT * FROM exercises WHERE muscles = 'Ноги'")
+  const result = getExercises("SELECT * FROM exercises WHERE muscles = 'legs'")
   result.then(arr => {
     res.setHeader("Access-Control-Allow-Origin", "*")
     res.json(arr)
@@ -114,7 +121,7 @@ app.get("/exercises/legs", (req, res) => {
 });
 
 app.get("/exercises/abs", (req, res) => {
-  const result = getExercises("SELECT * FROM exercises WHERE muscles = 'Пресс'")
+  const result = getExercises("SELECT * FROM exercises WHERE muscles = 'abs'")
   result.then(arr => {
     res.setHeader("Access-Control-Allow-Origin", "*")
     res.json(arr)
@@ -122,7 +129,7 @@ app.get("/exercises/abs", (req, res) => {
 });
 
 app.get("/exercises/arms", (req, res) => {
-  const result = getExercises("SELECT * FROM exercises WHERE muscles = 'Руки'")
+  const result = getExercises("SELECT * FROM exercises WHERE muscles = 'arms'")
   result.then(arr => {
     res.setHeader("Access-Control-Allow-Origin", "*")
     res.json(arr)
@@ -130,7 +137,7 @@ app.get("/exercises/arms", (req, res) => {
 });
 
 app.get("/exercises/back", (req, res) => {
-  const result = getExercises("SELECT * FROM exercises WHERE muscles = 'Спина'")
+  const result = getExercises("SELECT * FROM exercises WHERE muscles = 'back'")
   result.then(arr => {
     res.setHeader("Access-Control-Allow-Origin", "*")
     res.json(arr)
