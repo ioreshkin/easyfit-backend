@@ -21,13 +21,13 @@ const getExercises = async (sqlReq) => {
       rows.forEach((row) => {
         result.push({
           "name_ru": row.name_ru,
-          "description_ru": row.description_ru,
-          "short_description_off_page_ru": row.short_description_off_page_ru,
-          "short_description_on_page_ru": row.short_description_on_page_ru,
+          "description_ru": row.short_description_on_page_ru,
+          "short_description_off_page_ru": row.description_ru,
+          "short_description_on_page_ru": row.short_description_off_page_ru,
           "name_en": row.name_en,
-          "description_en": row.description_en,
-          "short_description_off_page_en": row.short_description_off_page_en,
-          "short_description_on_page_en": row.short_description_on_page_en,
+          "description_en": row.short_description_on_page_en,
+          "short_description_off_page_en": row.description_en,
+          "short_description_on_page_en": row.short_description_off_page_en,
           "muscles": row.muscles,
           "gif": row.gif,
           "preview": row.preview
