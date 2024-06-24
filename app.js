@@ -54,12 +54,12 @@ const getPrograms = async (sqlReq) => {
       rows.forEach((row) => {
         result.push({
           "name_ru": row.name_ru,
-          "description_ru": row.description_ru,
-          "short_description_ru": row.short_description_ru,
+          "description_ru": row.short_description_ru,
+          "short_description_ru": row.description_ru,
           "time_ru": row.time_ru,
           "name_en": row.name_en,
-          "description_en": row.description_en,
-          "short_description_en": row.short_description_en,
+          "description_en": row.short_description_en,
+          "short_description_en": row.description_en,
           "time_en": row.time_en,
           "categories": row.categories,
           "exercises": row.exercises,
