@@ -83,6 +83,7 @@ app.use((req, res, next) => {
 app.get("/exercises", (req, res) => {
   const result = getExercises("SELECT * FROM exercises")
   result.then(arr => {
+    
     res.status(200);
     res.json(arr);
   })
