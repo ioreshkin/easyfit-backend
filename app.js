@@ -1,34 +1,10 @@
 const express = require('express');
-const sqlite3 = require('sqlite3').verbose();
 const db = require('./db');
 
 const port = 3002;
 const app = express();
-const jsonParser = express.json();
 
-// const string1 = "Наклоны головы — техника выполнения упражнения:\n1. Встаньте прямо.\n2. Медленно наклоните голову вперед, пытаясь прижать подбородок к груди. Затем отведите голову назад, стараясь не перегружать шею\n3. Медленно наклоните голову к левому плечу, стараясь прижать ухо к плечу. Вернитесь в исходное положение и повторите наклон к правому плечу.\n4. Повторите несколько раз для каждой стороны."
-// const sql = `INSERT INTO exercises (name_en, name_ru, description_ru, short_description_off_page_ru, short_description_on_page_ru, short_description_off_page_en, short_description_on_page_en, description_en, muscles, preview, gif) 
-// VALUES ('High Knees Running', 'Бег, Колени Вверх', 'Бег на месте с высоко поднятыми коленями', 'Бег на месте с высоко поднятыми коленями', 'Группа мышц: Ноги\nВид программы: Динамическая\nОборудование: Нет\nУровень сложности: Лёгкий', 'Running in place with your knees high', 'Muscle group: Legs\nType of program: Dynamic\nEquipment: None\nDifficulty level: Easy', 'Running on the spot with knees high', 'legs', '/images/exercises/highkneesrunning.jpg', '/images/exercises/HighKneesRunning.gif')`;
-// const sql = `INSERT INTO programs (name_ru, name_en, description_ru, short_description_ru, short_description_en, description_en, categories, exercises, exercises_repeats, preview, time_ru, time_en)
-//  VALUES ('Приседания)', 'Sit-ups', 'похуй', 'Ну там присесть, а потом ну это самое.. О! Встать', 'Fxck fxck fxck fxck fxck fxck fxck fxck fxck', 'похуй', 'home', '1', '20', '/images/programs/Picture.png', '15 мин', '15 mins')`;
-
-// db.run(sql, function(err) {
-//   if (err) {
-//     console.error(err.message);
-//   }
-//   // Вывод сообщения об успешном выполнении операции
-//   console.log(`Row inserted with key: ${this.lastID}`);
-// });
-
-// const sql = `DROP TABLE exercises`;
-
-// db.run(sql, function(err) {
-//   if (err) {
-//     console.error(err.message);
-//   }
-//   // Вывод сообщения об успешном выполнении операции
-//   console.log(`Row inserted with key: ${this.lastID}`);
-// });
+app.listen(port);
 
 const getExercises = async (sqlReq) => {
   const result = [];
@@ -41,7 +17,7 @@ const getExercises = async (sqlReq) => {
         return;
       }
       
-      // Вывод всех записей
+      // обработка всех записей
       rows.forEach((row) => {
         result.push({
           "name_ru": row.name_ru,
@@ -107,10 +83,10 @@ app.use((req, res, next) => {
 app.get("/exercises", (req, res) => {
   const result = getExercises("SELECT * FROM exercises")
   result.then(arr => {
+    
     res.status(200);
     res.json(arr);
   })
-  
 });
 
 app.get("/exercises/chest", (req, res) => {
@@ -178,4 +154,3 @@ app.get("/programs/gym", (req, res) => {
   })
 })
 
-app.listen(port);
