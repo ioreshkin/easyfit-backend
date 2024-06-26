@@ -21,12 +21,12 @@ const getExercises = async (sqlReq) => {
       rows.forEach((row) => {
         result.push({
           "name_ru": row.name_ru,
-          "description_ru": row.short_description_on_page_ru,
-          "short_description_off_page_ru": row.description_ru,
+          "description_ru": row.description_ru,
+          "short_description_off_page_ru": row.short_description_on_page_ru,
           "short_description_on_page_ru": row.short_description_off_page_ru,
           "name_en": row.name_en,
-          "description_en": row.short_description_on_page_en,
-          "short_description_off_page_en": row.description_en,
+          "description_en": row.description_en,
+          "short_description_off_page_en": row.short_description_on_page_en,
           "short_description_on_page_en": row.short_description_off_page_en,
           "muscles": row.muscles,
           "gif": row.gif,
@@ -54,12 +54,12 @@ const getPrograms = async (sqlReq) => {
       rows.forEach((row) => {
         result.push({
           "name_ru": row.name_ru,
-          "description_ru": row.short_description_ru,
-          "short_description_ru": row.description_ru,
+          "description_ru": row.description_ru,
+          "short_description_ru": row.short_description_ru,
           "time_ru": row.time_ru,
           "name_en": row.name_en,
-          "description_en": row.short_description_en,
-          "short_description_en": row.description_en,
+          "description_en": row.description_en,
+          "short_description_en": row.short_description_en,
           "time_en": row.time_en,
           "categories": row.categories,
           "exercises": row.exercises,
