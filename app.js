@@ -20,6 +20,7 @@ const getExercises = async (sqlReq) => {
       // обработка всех записей
       rows.forEach((row) => {
         result.push({
+          "id": row.id,
           "name_ru": row.name_ru,
           "description_ru": row.short_description_on_page_ru,
           "short_description_off_page_ru": row.description_ru,
